@@ -1,0 +1,47 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.logo-box {
+    padding-top: 5vh;
+    padding-bottom: 2vh;
+}
+.logo {
+    width: 20vh;
+}
+.btn-search {
+    background-color: #222;
+    color: #FFF;
+}
+
+.btn-search:hover {
+    background-color: #222;
+    opacity: 0.6;
+    color: #FFF;
+}
+
+.form-stories {
+    justify-content: center;
+    display: flex;
+}
+
+.input-search {
+    margin-bottom: 1vh;
+    padding: 10px 10px;
+}
+
+@media (min-width: 768px) {
+    .input-search {
+        min-width: 50vh;
+    }
+}
+
+.btn-download {
+    background-color: #149C74;
+    color: #FFF;
+    margin: 10px 0;
+}
+
+.btn-download:hover {
+    background-color: #149c73a1;
+}
