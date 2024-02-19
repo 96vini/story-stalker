@@ -25,5 +25,6 @@
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+        <script src="https://alwingulla.com/88/tag.min.js" data-zone="45152" async data-cfasync="false"></script>
     </body>
 </html>
