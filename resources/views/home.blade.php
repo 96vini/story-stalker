@@ -11,10 +11,10 @@
                 <img src="{{ asset('images/logo.png') }}" class="logo"/>
             </div>
             
-            <form class="form-stories" method="POST" action="{{ route('stories.read') }}">
+            <form class="form-stories" method="POST" action="{{ route('stories.read') }}" autocomplete="off">
                 @csrf
                 <div>
-                    <input class="form-control input-search" name="username" type="text" placeholder="Username" aria-label=".form-control-lg example">
+                    <input class="form-control input-search" name="username" type="text" placeholder="Username" autocomplete="false">
                     <button type="submit" class="btn btn-search">Search</button>
                 </div>
             </form>
