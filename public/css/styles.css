@@ -45,3 +45,10 @@ body {
 .btn-download:hover {
     background-color: #149c73a1;
 }
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    flex-warp: wrap;
+}
