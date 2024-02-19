@@ -44,7 +44,12 @@ class StoryService {
 
         foreach($response['data'] as $story) {
 
-            $type = $story['video_versions'] ? 1 : 2;
+            
+            if(isset($story['video_versions'])) {
+                $type = 1;
+            } else {
+                $type = 2;
+            }
 
             switch ($type) {
                 case 1:
