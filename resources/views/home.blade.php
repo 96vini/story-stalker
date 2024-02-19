@@ -33,7 +33,7 @@
                     @endif
                     @foreach($stories as $story)
                         <div class="col-lg-4 col-md-6 mb-2">
-                            @if ($story[''] == 'IMAGE')
+                            @if ($story['type'] == 'IMAGE')
                                 <img src="{{ $story['url'] }}" class="img-fluid" alt="Imagem">
                             @endif
                             @if ($story['type'] == 'VIDEO')
