@@ -21,9 +21,17 @@
 
             <div class="row justify-content-center align-items-center text-center">
                 @isset($stories)
-                    @foreach($stories as $story)
+                    <div>
+                        @if($stories['code'] === 'NOT_FOUND_USER')
+                            <h2>Nenhum usuário encontrado para esse username</h2>
+                        @endif
+                        @if($stories['code'] === 'NOT_FOUND_STORY')
+                            <h2>Nenhum stories encontrado para esse usuário</h2>
+                        @endif
+                    </div>
+                    {{-- @foreach($stories as $story)
                         <div class="col-lg-4 col-md-6 mb-2">
-                            @if ($story['type'] == 'IMAGE')
+                            @if ($story[''] == 'IMAGE')
                                 <img src="{{ $story['url'] }}" class="img-fluid" alt="Imagem">
                             @endif
                             @if ($story['type'] == 'VIDEO')
@@ -36,7 +44,7 @@
                                 </div>
                             @endif
                         </div>
-                    @endforeach
+                    @endforeach --}}
                 @endisset
             </div>
 

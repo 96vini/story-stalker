@@ -23,7 +23,11 @@ class StoryService {
 
         if($response->serverError()) return ['code' => 'NOT_FOUND_USER'];
 
-        return $this->getStoriesByUserId($response->json()['data']);
+        $response = $response->json();
+
+        if($response['status'] === 'fail')  return ['code' => 'NOT_FOUND_USER'];
+
+        return $this->getStoriesByUserId($response['data']);
     }
 
     public function getStoriesByUserId($user_id, $route = 'userstories') {
@@ -33,7 +37,12 @@ class StoryService {
         
         if($response->serverError()) return ['code' => 'NOT_FOUND_STORY'];
 
-        foreach($response->json()['data'] as $story) {
+        $response = $response->json();
+
+        if($response['data'] === null)  return ['code' => 'NOT_FOUND_STORY'];
+
+
+        foreach($response['data'] as $story) {
 
             $type = $story['video_versions'] ? 1 : 2;
 
