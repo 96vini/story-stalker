@@ -33,18 +33,20 @@
                     @endif
                     @foreach($stories as $story)
                         <div class="col-lg-4 col-md-6 mb-2">
-                            @if ($story['type'] == 'IMAGE')
-                                <img src="{{ $story['url'] }}" class="img-fluid" alt="Imagem">
-                            @endif
-                            @if ($story['type'] == 'VIDEO')
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <video class="embed-responsive-item" style="max-width: 100%;" controls>
-                                        <source src="{{ $story['url'] }}" type="video/mp4">
-                                        Seu navegador não suporta o elemento de vídeo.
-                                    </video>
-                                    <a class="btn btn-download" href="{{ route('story.download', ['filename' => $story['url'] ]) }}">Download</a>
-                                </div>
-                            @endif
+                            @isset($story['type'])
+                                @if ($story['type'] == 'IMAGE')
+                                    <img src="{{ $story['url'] }}" class="img-fluid" alt="Imagem">
+                                @endif
+                                @if ($story['type'] == 'VIDEO')
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <video class="embed-responsive-item" style="max-width: 100%;" controls>
+                                            <source src="{{ $story['url'] }}" type="video/mp4">
+                                            Seu navegador não suporta o elemento de vídeo.
+                                        </video>
+                                        <a class="btn btn-download" href="{{ route('story.download', ['filename' => $story['url'] ]) }}">Download</a>
+                                    </div>
+                                @endif
+                            @endisset
                         </div>
                     @endforeach
                 @endisset
