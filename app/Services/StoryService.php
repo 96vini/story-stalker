@@ -56,11 +56,11 @@ class StoryService {
             switch ($type) {
                 
                 case 1:
-                    Storage::disk('local')->put("app/public/$user_id/videos/$story_id.mp4", file_get_contents(trim($story['video_versions'][0]['url'])), 'public');
+                    Storage::disk('public')->put("app/public/$user_id/videos/$story_id.mp4", file_get_contents(trim($story['video_versions'][0]['url'])), 'public');
                     $stories[] = ['type' => 'VIDEO', 'url' => env('APP_URL')."/storage/app/public/$user_id/videos/$story_id.mp4"];
                     break;
                 case 2:
-                    Storage::disk('local')->put("app/public/$user_id/images/$story_id.png", file_get_contents(trim($story['image_versions2']['candidates'][0]['url'])), 'public');
+                    Storage::disk('public')->put("app/public/$user_id/images/$story_id.png", file_get_contents(trim($story['image_versions2']['candidates'][0]['url'])), 'public');
                     $stories[] = ['type' => 'IMAGE', 'url' => env('APP_URL')."/storage/app/public/$user_id/images/$story_id.png"];
                     break;
             }
