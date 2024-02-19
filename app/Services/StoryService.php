@@ -50,13 +50,13 @@ class StoryService {
             } else {
                 $type = 2;
             }
-
+   
             switch ($type) {
                 case 1:
-                    $stories[] = ['type' => 'VIDEO', 'url' => $story['video_versions'][0]['url']];
+                    $stories[] = ['type' => 'VIDEO', 'url' => trim($story['video_versions'][0]['url'])];
                     break;
                 case 2:
-                    $stories[] = ['type' => 'IMAGE', 'url' => $story['image_versions2'][0]['candidates'][0]['url']];
+                    $stories[] = ['type' => 'IMAGE', 'url' => trim($story['image_versions2']['candidates'][0]['url'])];
                     break;
             }
 
