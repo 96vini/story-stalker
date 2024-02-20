@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*', 'https://scontent-ams2-1.cdninstagram.com', 'https://scontent-ams1-1.cdninstagram.com/', 'https://scontent-ams3-1.cdninstagram.com/', 'https://scontent-ams2-2.cdninstagram.com/'],
 
     'allowed_origins_patterns' => [],
 

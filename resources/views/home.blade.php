@@ -33,20 +33,17 @@
                     @endif
                     @foreach($stories as $story)
                         <div class="col-lg-4 col-md-6 mb-2">
-                            @isset($story['type'])
-                                @if ($story['type'] == 'IMAGE')
-                                    <img src="{{ $story['url'] }}" class="img-fluid" alt="Imagem">
-                                @endif
-                                @if ($story['type'] == 'VIDEO')
+                                @if(isset($story['video_versions']))
                                     <div class="embed-responsive embed-responsive-16by9">
                                         <video class="embed-responsive-item" style="max-width: 100%;" controls>
-                                            <source src="{{ $story['url'] }}" type="video/mp4">
+                                            <source src="data:image/png;base64,{{ base64_encode(file_get_contents($story['video_versions'][0]['url'])) }}" type="video/mp4">
                                             Seu navegador não suporta o elemento de vídeo.
                                         </video>
-                                        <a class="btn btn-download" href="{{ route('story.download', ['filename' => $story['url'] ]) }}">Download</a>
                                     </div>
                                 @endif
-                            @endisset
+                                @if(isset($story['image_versions2']) && !isset($story['video_versions']))
+                                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents($story['image_versions2']['candidates'][1]['url'])) }}" class="img-fluid">
+                                @endif
                         </div>
                     @endforeach
                 @endisset
