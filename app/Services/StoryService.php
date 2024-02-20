@@ -49,7 +49,7 @@ class StoryService {
                         $type = 'IMAGE';
                         $url = $story['image_versions2']['candidates'][0]['url'];
                     } else {
-                        continue;
+                        continue; // Ignorar stories sem URL válido
                     }
     
                     $stories[] = ['type' => $type, 'url' => $url];
@@ -61,4 +61,5 @@ class StoryService {
             return [];
         });
     }
+    
 }
