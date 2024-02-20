@@ -42,7 +42,7 @@ class StoryService {
 
         if($response['data'] === null)  return ['code' => 'NOT_FOUND_STORY'];
 
-
+        set_time_limit(120);
         foreach($response['data'] as $story) {
 
             $story_id = $story['id'];
@@ -52,15 +52,18 @@ class StoryService {
             } else {
                 $type = 2;
             }
-   
+            
             switch ($type) {
                 
                 case 1:
-                    Storage::disk('public')->put("app/public/$user_id/videos/$story_id.mp4", file_get_contents(trim($story['video_versions'][0]['url'])), 'public');
+                    $video = file_get_contents(trim($story['video_versions'][0]['url']));
+
+                    Storage::disk('public')->put("app/public/$user_id/videos/$story_id.mp4", $video, 'public');
                     $stories[] = ['type' => 'VIDEO', 'url' => env('APP_URL')."/storage/app/public/$user_id/videos/$story_id.mp4"];
                     break;
                 case 2:
-                    Storage::disk('public')->put("app/public/$user_id/images/$story_id.png", file_get_contents(trim($story['image_versions2']['candidates'][0]['url'])), 'public');
+                    $image = file_get_contents(trim($story['image_versions2']['candidates'][0]['url']));
+                    Storage::disk('public')->put("app/public/$user_id/images/$story_id.png", $image, 'public');
                     $stories[] = ['type' => 'IMAGE', 'url' => env('APP_URL')."/storage/app/public/$user_id/images/$story_id.png"];
                     break;
             }
