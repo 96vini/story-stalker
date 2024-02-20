@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,61 +15,57 @@ class StoryService {
     }
 
     public function getStories($username) {
-        return $this->getUserIdByUsername($username);
+        $user_id = $this->getUserIdByUsername($username);
+        return $this->getStoriesByUserId($user_id);
     }
 
     public function getUserIdByUsername($username, $route = 'userid') {
-        $endpoint = env('API_INSTAG_URL')."/$route/$username";
-        
-        $response = $this->api($endpoint);
+        return Cache::remember("user_id_$username", 60 * 60, function () use ($username, $route) {
+            $endpoint = env('API_INSTAG_URL') . "/$route/$username";
+            $response = $this->api($endpoint);
 
-        if($response->serverError()) return ['code' => 'NOT_FOUND_USER'];
+            if ($response->successful()) {
+                return $response->json('data');
+            }
 
-        $response = $response->json();
-
-        if($response['status'] === 'fail')  return ['code' => 'NOT_FOUND_USER'];
-
-        return $this->getStoriesByUserId($response['data']);
+            return null;
+        });
     }
 
     public function getStoriesByUserId($user_id, $route = 'userstories') {
-        $endpoint = env('API_INSTAG_URL')."/$route/$user_id";
-
-        $response = $this->api($endpoint);
-        
-        if($response->serverError()) return ['code' => 'NOT_FOUND_STORY'];
-
-        $response = $response->json();
-
-        if($response['data'] === null)  return ['code' => 'NOT_FOUND_STORY'];
-
-        foreach($response['data'] as $story) {
-
-            $story_id = $story['id'];
-
-            if(isset($story['video_versions'])) {
-                $type = 1;
-            } else {
-                $type = 2;
+        return Cache::remember("stories_$user_id", 60 * 60, function () use ($user_id, $route) {
+            $endpoint = env('API_INSTAG_URL') . "/$route/$user_id";
+            $response = $this->api($endpoint);
+    
+            if ($response->successful()) {
+                $stories = [];
+                $data = $response->json('data');
+    
+                foreach ($data as $index => $story) {
+                    if (isset($story['video_versions'])) {
+                        $type = 'VIDEO';
+                        $url = $story['video_versions'][0]['url'];
+                    } elseif (isset($story['image_versions2']['candidates'][0]['url'])) {
+                        $type = 'IMAGE';
+                        $url = $story['image_versions2']['candidates'][0]['url'];
+                    } else {
+                        continue;
+                    }
+    
+                    $fileData = Http::get(trim($url))->body();
+                    $extension = $type === 'VIDEO' ? 'mp4' : 'png';
+                    $filePath = "app/public/$user_id/{$type}s/".($index + 1).".$extension";
+    
+                    Storage::disk('public')->put($filePath, $fileData, 'public');
+    
+                    $stories[] = ['type' => $type, 'url' => Storage::url($filePath)];
+                }
+    
+                return $stories;
             }
-            
-            switch ($type) {
-                
-                case 1:
-                    $video = file_get_contents(trim($story['video_versions'][0]['url']));
-
-                    Storage::disk('public')->put("app/public/$user_id/videos/$story_id.mp4", $video, 'public');
-                    $stories[] = ['type' => 'VIDEO', 'url' => $story['video_versions'][0]['url']];
-                    break;
-                case 2:
-                    $image = file_get_contents(trim($story['image_versions2']['candidates'][0]['url']));
-                    Storage::disk('public')->put("app/public/$user_id/images/$story_id.png", $image, 'public');
-                    $stories[] = ['type' => 'IMAGE', 'url' => $story['image_versions2']['candidates'][0]['url']];
-                    break;
-            }
-
-        }
-
-        return $stories;
+    
+            return [];
+        });
     }
+    
 }
