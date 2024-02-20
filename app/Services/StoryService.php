@@ -58,7 +58,7 @@ class StoryService {
                     $video = file_get_contents(trim($story['video_versions'][0]['url']));
 
                     Storage::disk('public')->put("app/public/$user_id/videos/$story_id.mp4", $video, 'public');
-                    $stories[] = ['type' => 'VIDEO', 'url' => env('APP_URL')."/storage/app/public/$user_id/videos/$story_id.mp4"];
+                    $stories[] = ['type' => 'VIDEO', 'url' => $story['video_versions'][0]['url']];
                     break;
                 case 2:
                     $image = file_get_contents(trim($story['image_versions2']['candidates'][0]['url']));
