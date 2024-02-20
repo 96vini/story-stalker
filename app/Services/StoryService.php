@@ -42,7 +42,6 @@ class StoryService {
 
         if($response['data'] === null)  return ['code' => 'NOT_FOUND_STORY'];
 
-        set_time_limit(120);
         foreach($response['data'] as $story) {
 
             $story_id = $story['id'];
@@ -64,7 +63,7 @@ class StoryService {
                 case 2:
                     $image = file_get_contents(trim($story['image_versions2']['candidates'][0]['url']));
                     Storage::disk('public')->put("app/public/$user_id/images/$story_id.png", $image, 'public');
-                    $stories[] = ['type' => 'IMAGE', 'url' => env('APP_URL')."/storage/app/public/$user_id/images/$story_id.png"];
+                    $stories[] = ['type' => 'IMAGE', 'url' => $story['image_versions2']['candidates'][0]['url']];
                     break;
             }
 
