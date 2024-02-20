@@ -52,13 +52,7 @@ class StoryService {
                         continue;
                     }
     
-                    $fileData = Http::get(trim($url))->body();
-                    $extension = $type === 'VIDEO' ? 'mp4' : 'png';
-                    $filePath = "app/public/$user_id/{$type}s/".($index + 1).".$extension";
-    
-                    Storage::disk('public')->put($filePath, $fileData, 'public');
-    
-                    $stories[] = ['type' => $type, 'url' => Storage::url($filePath)];
+                    $stories[] = ['type' => $type, 'url' => $url];
                 }
     
                 return $stories;
@@ -67,5 +61,4 @@ class StoryService {
             return [];
         });
     }
-    
 }
