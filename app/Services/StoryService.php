@@ -48,8 +48,16 @@ class StoryService {
                     } elseif (isset($story['image_versions2']['candidates'][0]['url'])) {
                         $type = 'IMAGE';
                         $url = $story['image_versions2']['candidates'][0]['url'];
+    
+                        $fileData = Http::get(trim($url))->body();
+                        $extension = 'png';
+                        $filePath = "app/public/$user_id/images/".($index + 1).".$extension";
+    
+                        Storage::disk('public')->put($filePath, $fileData, 'public');
+    
+                        $url = Storage::url($filePath);
                     } else {
-                        continue; // Ignorar stories sem URL válido
+                        continue;
                     }
     
                     $stories[] = ['type' => $type, 'url' => $url];
@@ -61,5 +69,6 @@ class StoryService {
             return [];
         });
     }
+    
     
 }
