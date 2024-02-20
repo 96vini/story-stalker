@@ -16,7 +16,7 @@ class StoryService {
     }
 
     public function getStories($username) {
-        return $this->getUserIdByUsername($username);
+        return $this->getUserIdByUsername(strtolower($username));
     }
 
     public function getUserIdByUsername($username, $route = 'userid') {
@@ -43,8 +43,6 @@ class StoryService {
     public function getStoriesByUserId($user_id, $route = 'userstories') {
 
         $cacheKey = "stories:$user_id";
-
-        //if(Cache::has($cacheKey)) return Cache::get($cacheKey);
         
         $endpoint = env('API_INSTAG_URL')."/$route/$user_id";
 
@@ -55,24 +53,31 @@ class StoryService {
         $response = $response->json();
 
         if($response['data'] === null)  return ['code' => 'NOT_FOUND_STORY'];
-        
-        Cache::put("stories:$user_id", $response['data']);
 
         return $response['data'];
     }
 
     public function saveFiles($stories, $user_id) {
-        foreach ($stories as &$story) { // Use "&" para passar a referência do array
-            $storyId = $story['id'];
+        foreach ($stories as &$story) {
+
+            $story_id = $story['id'];
         
             if (isset($story['video_versions'])) {
+                
                 $videoContent = file_get_contents($story['video_versions'][0]['url']);
+                
                 Storage::disk('public')->put("users/$user_id/videos/$storyId.mp4", $videoContent);
+            
                 $story['video_versions'][0]['url'] = Storage::disk('public')->url("users/$user_id/videos/$storyId.mp4");
+
             } elseif (isset($story['image_versions2'])) {
+                
                 $imageContent = file_get_contents($story['image_versions2']['candidates'][0]['url']);
+                 
                 $imageName = "$storyId.png";
+
                 Storage::disk('public')->put("users/$user_id/images/$imageName", $imageContent);
+                
                 $story['image_versions2']['candidates'][0]['url'] = Storage::disk('public')->url("users/$user_id/images/$imageName");
             }
         }
