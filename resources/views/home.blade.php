@@ -32,23 +32,22 @@
                         </div>
                     @endif
                     @foreach($stories as $story)
-                        <div class="col-lg-4 col-md-6 mb-2">
-                                @if(isset($story['video_versions']))
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <video class="embed-responsive-item" style="max-width: 100%;" controls>
-                                            <source src="data:image/png;base64,{{ base64_encode(file_get_contents($story['video_versions'][0]['url'])) }}" type="video/mp4">
-                                            Seu navegador não suporta o elemento de vídeo.
-                                        </video>
-                                    </div>
-                                @endif
-                                @if(isset($story['image_versions2']) && !isset($story['video_versions']))
-                                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents($story['image_versions2']['candidates'][1]['url'])) }}" class="img-fluid">
-                                @endif
+                        <div class="col-lg-4 col-md-6 col-12 mb-2">
+                            @if(isset($story['video_versions']))
+                                <div class="embed-responsive embed-responsive-1by1">
+                                    <video class="embed-responsive-item" style="max-width: 100%; min-height: 300px;" controls>
+                                        <source src="{{ $story['video_versions'][0]['url'] }}" type="video/mp4">
+                                        Seu navegador não suporta o elemento de vídeo.
+                                    </video>
+                                </div>
+                            @endif
+                            @if(isset($story['image_versions2']) && !isset($story['video_versions']))
+                                <img src="{{ $story['image_versions2']['candidates'][1]['url'] }}" class="img-fluid" style="min-width: 100%; min-height: 300px;">
+                            @endif
                         </div>
                     @endforeach
                 @endisset
-            </div>
-
+            </div>                      
         </div>
     </div>
 </div>
