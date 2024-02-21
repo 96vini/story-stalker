@@ -36,7 +36,7 @@
                             @if(isset($story['video_versions']))
                                 <div class="embed-responsive embed-responsive-1by1">
                                     <video class="embed-responsive-item" style="max-width: 100%; min-height: 300px;" controls>
-                                        <source src="{{ $story['video_versions'][0]['url']) }}" type="video/mp4">
+                                        <source src="{{ $story['video_versions'][0]['url'] }}" type="video/mp4">
                                         Seu navegador não suporta o elemento de vídeo.
                                     </video>
                                 </div>
