@@ -42,7 +42,7 @@
                                 </div>
                             @endif
                             @if(isset($story['image_versions2']) && !isset($story['video_versions']))
-                                <img src="{{ base64_encode(file_get_contents($story['image_versions2']['candidates'][1]['url'])) }}" class="img-fluid" style="min-width: 100%; min-height: 300px;">
+                                <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents($story['image_versions2']['candidates'][1]['url'])) }}" class="img-fluid" style="min-width: 100%; min-height: 300px;">
                             @endif
                         </div>
                     @endforeach
