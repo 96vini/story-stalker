@@ -31,21 +31,25 @@
                             @endif
                         </div>
                     @endif
-                    @foreach($stories as $story)
-                        <div class="col-lg-4 col-md-6 col-12 mb-2">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                        @foreach($stories as $story)
                             @if(isset($story['video_versions']))
-                                <div class="embed-responsive embed-responsive-1by1">
-                                    <video class="embed-responsive-item" style="max-width: 100%; min-height: 300px;" controls>
-                                        <source src="{{ $story['video_versions'][0]['url'] }}" type="video/mp4">
-                                        Seu navegador não suporta o elemento de vídeo.
-                                    </video>
+                                <div class="item" style="padding: 5px;">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <video class="embed-responsive-item" style="max-width: 100%;width: 40vh; height: auto;" controls>
+                                            <source src="{{ $story['video_versions'][0]['url'] }}" type="video/mp4">
+                                            Seu navegador não suporta o elemento de vídeo.
+                                        </video>
+                                    </div>
                                 </div>
                             @endif
                             @if(isset($story['image_versions2']) && !isset($story['video_versions']))
-                                <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents($story['image_versions2']['candidates'][1]['url'])) }}" class="img-fluid" style="min-width: 100%; min-height: 300px;">
+                                <div class="item" style="padding: 5px;">
+                                    <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents($story['image_versions2']['candidates'][1]['url'])) }}" class="img-fluid" style="max-width: 100%;width: 40vh; height: auto;">
+                                </div>
                             @endif
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>                    
                 @endisset
             </div>                      
         </div>
