@@ -15,7 +15,7 @@
                 @csrf
                 <div>
                     <input class="form-control input-search" style="border-radius: 30px;border-radius: 30px;
-                    padding: 10px 20px;" name="username" type="text" placeholder="Username" autocomplete="false">
+                    padding: 10px 20px;min-width: 40vh;" name="username" type="text" placeholder="Username" autocomplete="false">
                     <button type="submit" class="btn btn-search btn-secondary" style="border-radius: 30px;padding: 5px 25px;">Search</button>
                 </div>
             </form>
