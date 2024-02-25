@@ -1,9 +1,17 @@
 <html>
     <head>
-        <title>{{ env('APP_NAME') }}</title>
+        <title>{{ env('APP_NAME') }} - @yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="monetag" content="478a5c11a1a27c708adeee8a399c1c47">
         <meta name="google-site-verification" content="hSPFkTfMNjDrhVEqc_xx_JCKzmnH_c1ljRH6K4JhktE" />
+        <meta name="description" content="Watch stories anonymously" />
+        <meta name="description" content="Assista stories de forma anônima" />
+        <meta name="keywords" content="assistir stories, assistir stories anônimo, ver stories anônimo, ver stories, stories,assistir stories, assistir stories anônimo instagram, ver stories anônimo instagram, ver stories instagram, stories instagram" />
+        <meta name="keywords" content="watch stories, watch anonymous stories, view stories anonymously, view stories, stories, watch Instagram stories, watch anonymous Instagram stories, view anonymous Instagram stories, view Instagram stories, Instagram stories" />
+        <meta property="og:title" content="StoryStalker - Assista stories de forma anônima">
+        <meta property="og:description" content="Assista stories de forma anônima">
+        <meta property="og:image" content="{{ asset('/images/logo.png') }}">
+        <meta property="og:url" content="https://storystalker.com.br">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +21,7 @@
     </head>
     <body class="flex justify-center items-center h-screen bg-gray-100">
         @yield('content')
+        @yield('footer')
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4532345266100403"
      crossorigin="anonymous"></script>

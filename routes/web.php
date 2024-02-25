@@ -17,4 +17,5 @@ use App\Http\Controllers\StoryController;
 
 Route::get('/', [StoryController::class, 'index']);
 Route::post('/', [StoryController::class, 'read'])->name('stories.read');
-Route::get('/download', [StoryController::class, 'download'])->name('story.download');
+Route::get('/download-video', [StoryController::class, 'downloadVideo'])->name('story.downloadVideo');
+Route::get('/download-image', [StoryController::class, 'downloadImage'])->name('story.downloadImage');
