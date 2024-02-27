@@ -29,7 +29,6 @@
     </head>
     <body class="flex justify-center items-center h-screen bg-gray-100">
         @yield('content')
-        @yield('footer')
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NNBTL35"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

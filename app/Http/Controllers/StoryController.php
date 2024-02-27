@@ -63,6 +63,16 @@ class StoryController extends Controller
         ];
     
         return response($video_data, 200, $headers);
-    }    
+    }
+
+    public function SeoPagePt(Request $request)
+    {
+        return view('seo.seo-page-pt-br');
+    }
+
+    public function SeoPageEn(Request $request)
+    {
+        return view('seo.seo-page-en');
+    }
     
 }

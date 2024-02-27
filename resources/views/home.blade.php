@@ -58,9 +58,13 @@
                                 </div>
                             @endif
                         @endforeach
-                    </div>                    
+                    </div>
                 @endisset
             </div>                      
+        </div>
+        <div class="col-md-6 text-center" style="padding-top: 20vh;">
+            <h2 class="font-weight-bold" style="color: #333;font-weight: bold;padding-top: 20px;">Explore Instagram Stories Anonymously</h2>
+            <p style="color: #666;">StoryStalker offers a seamless and free solution for anonymously viewing Instagram stories from public accounts without the need for Instagram authorization. Our platform provides hassle-free functionality, allowing you to effortlessly browse stories incognito, all at no cost. Simply enter the Instagram username, and you're ready to dive into a world of captivating stories, hassle-free and anonymous.</p>
         </div>
     </div>
 </div>
