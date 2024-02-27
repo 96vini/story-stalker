@@ -12,6 +12,7 @@
         <meta property="og:description" content="Assista stories de forma anônima">
         <meta property="og:image" content="{{ asset('/images/logo.png') }}">
         <meta property="og:url" content="https://storystalker.com.br">
+        <meta name="viewport">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +27,17 @@
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-5NNBTL35');</script>
             <!-- End Google Tag Manager -->
+        
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-J3CFLT4BDB"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-J3CFLT4BDB');
+            </script>
+
     </head>
     <body class="flex justify-center items-center h-screen bg-gray-100">
         @yield('content')
