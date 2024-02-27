@@ -13,7 +13,7 @@ body {
     width: 20vh;
 }
 .btn-search {
-    background-color: #222;
+    background-color: #444445;
     color: #FFF;
 }
 
@@ -70,4 +70,12 @@ ul li, ol li {
 
 h1, h2, h3, h4, h5, p {
     line-height: 1.5;
+}
+
+.info-container {
+    color: #FFF;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Padrão */
 }
